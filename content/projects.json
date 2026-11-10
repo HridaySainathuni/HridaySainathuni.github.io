@@ -1,0 +1,18 @@
+[
+  {
+    "slug": "resume-tailor",
+    "title": "Resume Tailor",
+    "status": "shipped",
+    "summary": "A web app that rewrites your resume for a specific job posting with Claude. It only uses experience already on your resume, and it writes a matching cover letter too.",
+    "highlights": [
+      "Scores keyword overlap between your resume and the job description",
+      "Imports job postings from a URL and exports to PDF or Word",
+      "Accounts, saved history, and Stripe subscriptions, deployed with Docker on Render"
+    ],
+    "stack": ["Python", "Flask", "PostgreSQL", "Anthropic API", "Stripe", "Docker"],
+    "links": {
+      "repo": "https://github.com/HridaySainathuni/resume-tailor-saas"
+    },
+    "updated": "2026-11"
+  }
+]
