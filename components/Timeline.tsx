@@ -1,4 +1,4 @@
-import { roles, type Role } from "@/content/profile";
+import { roles as allRoles, type Role } from "@/content/profile";
 
 // Experience drawn as a trace waterfall: one row per role, a bar for its span of time.
 // Click a row to expand what was done there.
@@ -18,7 +18,8 @@ function nowYm() {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
 }
 
-export default function Timeline() {
+export default function Timeline({ roles: givenRoles }: { roles?: Role[] }) {
+  const roles = givenRoles ?? allRoles;
   const now = nowYm();
   const startYear = Math.min(...roles.map((r) => Number(r.start.slice(0, 4))));
   const lastYm = roles.reduce((max, r) => {
