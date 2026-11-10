@@ -16,7 +16,6 @@ export default function Home() {
           </p>
         ))}
         <nav className="hero-links" aria-label="Contact and profiles">
-          <a href={links.resume}>Resume</a>
           <a href={links.github} target="_blank" rel="noreferrer">GitHub</a>
           {links.linkedin && (
             <a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
