@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
+import { flushSync } from "react-dom";
 import RoleCards from "@/components/RoleCards";
 import Timeline from "@/components/Timeline";
 import { roles } from "@/content/profile";
@@ -33,14 +34,27 @@ const validIds = themes.map((t) => t.id);
 export default function Experience() {
   const [active, setActive] = useState("agents");
 
-  useEffect(() => {
+  // Read the thread from the URL before the first paint, so links like /experience#evals
+  // open on the right tab without flashing the default one.
+  useLayoutEffect(() => {
     const hash = window.location.hash.replace("#", "");
     if (validIds.includes(hash)) setActive(hash);
   }, []);
 
   const select = (id: string) => {
-    setActive(id);
-    window.history.replaceState(null, "", `/experience#${id}`);
+    if (id === active) return;
+    window.history.replaceState(null, "", `/experience/#${id}`);
+    const update = () => flushSync(() => setActive(id));
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Slide the tab highlight and crossfade the list where the browser supports it.
+    if (!reduce && "startViewTransition" in document) {
+      const root = document.documentElement;
+      root.classList.add("vt-tabs");
+      const t = document.startViewTransition(update);
+      t.finished.finally(() => root.classList.remove("vt-tabs"));
+    } else {
+      update();
+    }
   };
 
   const theme = themes.find((t) => t.id === active)!;
@@ -67,12 +81,15 @@ export default function Experience() {
               className="thread-tab"
               onClick={() => select(t.id)}
             >
-              {t.label} <span className="thread-count">{count}</span>
+              {active === t.id && <span className="thread-pill" aria-hidden="true" />}
+              <span className="thread-label">
+                {t.label} <span className="thread-count">{count}</span>
+              </span>
             </button>
           );
         })}
       </div>
-      <section aria-labelledby="thread-heading">
+      <section aria-labelledby="thread-heading" className="thread-panel">
         <h2 id="thread-heading">{theme.label}</h2>
         <p className="section-note">{theme.desc}</p>
         {active === "all" ? (
