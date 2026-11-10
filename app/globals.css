@@ -408,16 +408,140 @@ a:hover {
   background: var(--now);
 }
 
+/* Experience threads (tabs) */
+
+.thread-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.thread-tab {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.94rem;
+  font-weight: 560;
+  cursor: pointer;
+}
+
+.thread-tab:hover {
+  background: var(--hover);
+}
+
+.thread-tab[aria-selected="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.thread-count {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.thread-tab[aria-selected="true"] .thread-count {
+  color: var(--paper);
+  opacity: 0.75;
+}
+
+/* Role cards */
+
+.role-card {
+  margin-top: 1rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+}
+
+.role-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+}
+
+.role-card h3 {
+  font-size: 1.15rem;
+  font-weight: 620;
+  letter-spacing: -0.01em;
+}
+
+.role-dates {
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.role-title {
+  margin-top: 0.1rem;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.role-kind {
+  display: inline-block;
+  margin-top: 0.6rem;
+  padding: 0.05rem 0.5rem;
+  border: 1px solid var(--industry);
+  border-radius: 999px;
+  color: var(--industry);
+  font-size: 0.78rem;
+  font-weight: 560;
+}
+
+.role-kind[data-kind="research"] {
+  border-color: var(--research);
+  color: var(--research);
+}
+
+.role-bullets {
+  margin-top: 0.75rem;
+  list-style: none;
+  padding-left: 0;
+}
+
+.role-bullets li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.role-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 2px;
+  background: var(--industry);
+}
+
+.role-card[data-kind="research"] .role-bullets li::before {
+  background: var(--research);
+}
+
 /* Projects */
 
 .projects {
   margin-top: 1.25rem;
-  border-top: 1px solid var(--rule);
 }
 
 .project {
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--rule);
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  margin-top: 1rem;
   max-width: 42rem;
 }
 
@@ -448,12 +572,25 @@ a:hover {
 
 .project-highlights {
   margin-top: 0.6rem;
-  list-style: disc;
-  padding-left: 1.1rem;
+  list-style: none;
+  padding-left: 0;
 }
 
-.project-highlights li + li {
+.project-highlights li {
+  position: relative;
+  padding-left: 1.25rem;
   margin-top: 0.25rem;
+}
+
+.project-highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 2px;
+  background: var(--industry);
 }
 
 .project .project-stack {
@@ -478,12 +615,10 @@ a:hover {
 .papers li {
   display: flex;
   flex-direction: column;
-  padding: 1rem 0;
-  border-top: 1px solid var(--rule);
-}
-
-.papers li:last-child {
-  border-bottom: 1px solid var(--rule);
+  padding: 1.25rem 1.5rem;
+  margin-top: 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
 }
 
 .paper-title {
