@@ -15,6 +15,7 @@ Open http://localhost:3000.
 
 - **Projects:** `content/projects.json`. Coding agents update this file. See `AGENTS.md`.
 - **Everything else:** `content/profile.ts` has the intro, links, work history, and papers.
+- **Pages:** `app/` has Home, Experience, Projects, Papers, and About, with a top menu in `components/Nav.tsx`. Experience groups roles by theme using the `themes` field on each role in `profile.ts`.
 
 The work timeline draws itself from the dates in `profile.ts`. Add a role and its bar appears.
 
