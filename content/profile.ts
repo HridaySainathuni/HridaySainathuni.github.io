@@ -31,7 +31,6 @@ export const profile = {
     email: "sainathunih@gmail.com",
     github: "https://github.com/HridaySainathuni",
     linkedin: "https://www.linkedin.com/in/hriday-sainathuni-61774b233/",
-    resume: "/resume.pdf", // drop the PDF into /public as resume.pdf
   },
   outside:
     "Outside of code, I study poker. Mostly the math behind game theory optimal play, and when to break from it against a specific player. It changed how I work. Start from a solid default. Change course only when the evidence is real.",
@@ -51,17 +50,6 @@ export const roles: Role[] = [
       "Built an LLM-as-judge evaluation harness over LangSmith traces, scoring 963 sampled responses with Wilson confidence intervals.",
       "Built a fault-tolerant Kubernetes pipeline over 189K trace spans from 6,392 live agent turns, using cursor-based extraction and atomic checkpointing to survive pod evictions. It localized 71% of failures to a single hotspot.",
       "Fixed 5 production bugs, from session-memory pollution to hallucinated suggestions, and added regression tests for each.",
-    ],
-  },
-  {
-    org: "Insurity",
-    title: "AI Developer Intern",
-    kind: "industry",
-    start: "2025-12",
-    end: "2026-02",
-    bullets: [
-      "Built RAG pipelines over policy documents and billing statements using chunking, OpenAI embeddings, and Azure AI Search.",
-      "Shipped full-stack features across the Angular and .NET stack for the Billing-as-a-Service platform.",
     ],
   },
   {
@@ -96,6 +84,18 @@ export const roles: Role[] = [
     bullets: [
       "Built SMGLib, an open-source library in Python, Gym, and PyTorch for benchmarking multi-robot path planners.",
       "Co-authored an ICRA 2025 paper on decentralized multi-agent coordination for robot navigation.",
+    ],
+  },
+  {
+    org: "George Mason University",
+    title: "Aspiring Scientists Summer Internship Program",
+    kind: "research",
+    start: "2023-05",
+    end: "2024-06",
+    bullets: [
+      "Simulated collaborative robot behavior using NetworkX and interactive visualization tools (Dash, Plotly).",
+      "Implemented and tested RL algorithms (Q-Learning, PPO, hierarchical decomposition) in dynamic multi-agent environments.",
+      "Created evaluation figures and experimental results for an IEEE ICRA submission analyzing learned policy generalization.",
     ],
   },
   {
