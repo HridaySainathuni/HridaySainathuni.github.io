@@ -59,12 +59,92 @@ a:hover {
   border-radius: 2px;
 }
 
+/* Top menu */
+
+.site-nav {
+  border-bottom: 1px solid var(--rule);
+}
+
+.site-nav-inner {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+}
+
+.site-nav-brand {
+  font-weight: 680;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.site-nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-left: auto;
+  font-weight: 560;
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--industry);
+  text-decoration-color: currentColor;
+}
+
+/* Theme cards */
+
+.theme-cards {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .theme-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.theme-card {
+  display: block;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-decoration: none;
+}
+
+.theme-card:hover {
+  background: var(--hover);
+}
+
+.theme-card h3 {
+  font-size: 1.1rem;
+  font-weight: 620;
+  letter-spacing: -0.01em;
+}
+
+.theme-card p {
+  margin-top: 0.4rem;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
 /* Page */
 
 .page {
   max-width: 62rem;
   margin: 0 auto;
   padding: 4.5rem 1.5rem 3rem;
+}
+
+.page > h1 {
+  font-size: 2.2rem;
+  font-weight: 680;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 
 .page section {
@@ -423,6 +503,18 @@ a:hover {
 }
 
 /* Footer */
+
+.site-footer {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+  color: var(--muted);
+}
+
+.site-footer p {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.5rem;
+}
 
 .footer {
   margin-top: 5rem;

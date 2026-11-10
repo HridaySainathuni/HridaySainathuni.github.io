@@ -1,6 +1,22 @@
-import Timeline from "@/components/Timeline";
-import Projects from "@/components/Projects";
-import { profile, papers } from "@/content/profile";
+import { profile } from "@/content/profile";
+
+const themes = [
+  {
+    id: "agents",
+    title: "Agents and memory",
+    desc: "Agents that remember past work and use tools to get things done.",
+  },
+  {
+    id: "evals",
+    title: "Evals and reliability",
+    desc: "Tests and judges that tell you whether an agent actually got better.",
+  },
+  {
+    id: "robots",
+    title: "Multi-agent robots",
+    desc: "Robots that coordinate in tight spaces instead of getting stuck.",
+  },
+];
 
 export default function Home() {
   const { links } = profile;
@@ -24,46 +40,27 @@ export default function Home() {
         </nav>
       </header>
 
-      <section aria-labelledby="work">
-        <h2 id="work">Work and research</h2>
-        <p className="section-note">Click a row to see what I did there.</p>
-        <Timeline />
-      </section>
-
-      <section aria-labelledby="projects">
-        <h2 id="projects">Projects</h2>
-        <Projects />
-      </section>
-
-      <section aria-labelledby="papers">
-        <h2 id="papers">Papers</h2>
-        <ul className="papers">
-          {papers.map((p) => (
-            <li key={p.description}>
-              {p.title ? (
-                p.url ? (
-                  <a href={p.url} target="_blank" rel="noreferrer" className="paper-title">{p.title}</a>
-                ) : (
-                  <span className="paper-title">{p.title}</span>
-                )
-              ) : null}
-              <span className="paper-desc">{p.description}</span>
-              <span className="paper-venue">{p.venue}</span>
-            </li>
+      <section aria-labelledby="threads">
+        <h2 id="threads">Three threads</h2>
+        <p className="section-note">My work follows three ideas. Pick one to see the roles behind it.</p>
+        <div className="theme-cards">
+          {themes.map((t) => (
+            <a key={t.id} href={`/experience#${t.id}`} className="theme-card">
+              <h3>{t.title}</h3>
+              <p>{t.desc}</p>
+            </a>
           ))}
-        </ul>
+        </div>
       </section>
 
-      <section aria-labelledby="outside">
-        <h2 id="outside">Outside of work</h2>
-        <p className="prose">{profile.outside}</p>
-      </section>
-
-      <footer className="footer">
-        <p>
-          Want to talk? Email me at <a href={`mailto:${links.email}`}>{links.email}</a>.
+      <section aria-labelledby="more">
+        <h2 id="more">More</h2>
+        <p className="prose">
+          See what I built on the <a href="/projects">Projects</a> page, what I
+          published on the <a href="/papers">Papers</a> page, and a bit about
+          me on the <a href="/about">About</a> page.
         </p>
-      </footer>
+      </section>
     </main>
   );
 }
