@@ -87,6 +87,17 @@ export const roles: Role[] = [
     ],
   },
   {
+    org: "RobotiXX Lab, George Mason University",
+    title: "Multimodal Data Platform Development",
+    kind: "research",
+    start: "2023-06",
+    end: "2023-08",
+    bullets: [
+      "Engineered a ROS-based mobile device to collect multimodal sensor data (LiDAR, audio, video, odometry) for SLAM research.",
+      "Automated sensor calibration and deployment via ROS launch configs. The dataset was used in an IROS 2023 publication.",
+    ],
+  },
+  {
     org: "George Mason University",
     title: "Aspiring Scientists Summer Internship Program",
     kind: "research",
