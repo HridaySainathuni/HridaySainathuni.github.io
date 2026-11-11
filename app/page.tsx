@@ -1,6 +1,7 @@
 import Timeline from "@/components/Timeline";
 import { profile, roles, papers } from "@/content/profile";
-import projects from "@/content/projects.json";
+import ProjectCard from "@/components/ProjectCard";
+import { building, featured, progress } from "@/content/projects";
 
 const themes = [
   {
@@ -20,11 +21,9 @@ const themes = [
   },
 ];
 
-type Project = { slug: string; title: string; summary: string; updated: string };
-
 export default function Home() {
   const { links } = profile;
-  const latest = [...(projects as Project[])].sort((a, b) => b.updated.localeCompare(a.updated))[0];
+  const next = building ? progress(building).next : undefined;
 
   return (
     <main className="page">
@@ -36,6 +35,13 @@ export default function Home() {
             {p}
           </p>
         ))}
+        {building && (
+          <p className="now-building">
+            <span className="now-dot" aria-hidden="true" />
+            Right now I&apos;m building <a href={`/projects/${building.slug}/`}>{building.title}</a>
+            {next ? `. Next up: ${next.name}.` : "."}
+          </p>
+        )}
         <nav className="hero-links" aria-label="Contact and profiles">
           <a href={links.github} target="_blank" rel="noreferrer">GitHub</a>
           {links.linkedin && (
@@ -44,6 +50,18 @@ export default function Home() {
           <a href={`mailto:${links.email}`}>Email</a>
         </nav>
       </header>
+
+      {featured && (
+        <section aria-labelledby="featured">
+          <h2 id="featured">Featured project</h2>
+          <div className="featured">
+            <ProjectCard project={featured} />
+          </div>
+          <p className="latest-link">
+            <a href="/projects/">See all projects</a>
+          </p>
+        </section>
+      )}
 
       <section aria-labelledby="where">
         <h2 id="where">Where I&apos;ve worked</h2>
@@ -72,21 +90,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-labelledby="latest" className="latest">
-        <div>
-          <h2 id="latest">Latest project</h2>
-          {latest && (
-            <>
-              <h3 className="latest-title">{latest.title}</h3>
-              <p className="prose">{latest.summary}</p>
-              <p className="latest-link">
-                <a href="/projects/">See all projects</a>
-              </p>
-            </>
-          )}
-        </div>
-        <div>
-          <h2 id="published">Published</h2>
+      <section aria-labelledby="published" className="published">
+        <h2 id="published">Published</h2>
           <ul className="latest-papers">
             {papers.map((p) => (
               <li key={p.description}>
@@ -99,7 +104,6 @@ export default function Home() {
               </li>
             ))}
           </ul>
-        </div>
       </section>
     </main>
   );

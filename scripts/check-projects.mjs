@@ -24,9 +24,38 @@ for (const [i, p] of (Array.isArray(projects) ? projects : []).entries()) {
     if (!["repo", "demo", "writeup"].includes(k)) errors.push(`${at}: unknown link "${k}" (use repo, demo, writeup)`);
     if (url && !/^https:\/\//.test(url)) errors.push(`${at}: link "${k}" must start with https://`);
   }
-  const text = [p.summary, ...(p.highlights ?? [])].join(" ");
+  if (p.featured !== undefined && typeof p.featured !== "boolean") errors.push(`${at}: featured must be true or false`);
+  if (p.milestones) {
+    if (!Array.isArray(p.milestones) || p.milestones.length > 8) errors.push(`${at}: milestones must be an array of at most 8 items`);
+    for (const m of Array.isArray(p.milestones) ? p.milestones : []) {
+      if (typeof m?.name !== "string" || !m.name.trim() || typeof m?.done !== "boolean") errors.push(`${at}: each milestone needs a "name" and a true or false "done"`);
+    }
+  }
+  if (p.problem !== undefined && typeof p.problem !== "string") errors.push(`${at}: problem must be text`);
+  if (p.built && (!Array.isArray(p.built) || p.built.some((x) => typeof x !== "string"))) errors.push(`${at}: built must be an array of paragraphs`);
+  for (const d of p.decisions ?? []) {
+    if (typeof d?.title !== "string" || typeof d?.body !== "string") errors.push(`${at}: each decision needs a "title" and a "body"`);
+  }
+  if (p.results) {
+    const { columns, rows } = p.results;
+    if (!Array.isArray(columns) || !Array.isArray(rows)) errors.push(`${at}: results needs "columns" and "rows"`);
+    else if (rows.some((r) => !Array.isArray(r) || r.length !== columns.length)) errors.push(`${at}: every results row must have one value per column`);
+  }
+  const text = [
+    p.summary,
+    p.problem,
+    ...(p.highlights ?? []),
+    ...(Array.isArray(p.built) ? p.built : []),
+    ...(p.milestones ?? []).map((m) => m?.name),
+    ...(p.decisions ?? []).flatMap((d) => [d?.title, d?.body]),
+    p.results?.note,
+  ]
+    .filter(Boolean)
+    .join(" ");
   if (/[;—–#*]/.test(text)) errors.push(`${at}: avoid semicolons, dashes, hashtags, and asterisks in copy`);
 }
+
+if (Array.isArray(projects) && projects.filter((p) => p.featured).length > 1) errors.push("only one project can be featured");
 
 if (errors.length) {
   console.error(errors.join("\n"));

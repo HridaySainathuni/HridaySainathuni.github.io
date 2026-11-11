@@ -11,6 +11,7 @@ export type Role = {
   end?: string; // "YYYY-MM"; leave out for a role that hasn't ended
   upcoming?: boolean;
   themes?: string[]; // "agents", "evals", or "robots"
+  highlight?: string; // one short line shown next to the bar on the timeline
   bullets: string[];
 };
 
@@ -45,6 +46,7 @@ export const roles: Role[] = [
     start: "2026-05",
     end: "2026-08",
     themes: ["agents", "evals"],
+    highlight: "189K trace spans analyzed",
     bullets: [
       "Built cross-session memory for Workday's LangGraph planning agent, so users can pick up earlier work instead of rebuilding context.",
       "Wrote a Postgres retriever that ranks past conversations by relevance and recency, with 3 ms writes and 1.5 s recall.",
@@ -61,6 +63,7 @@ export const roles: Role[] = [
     start: "2025-08",
     end: "2025-12",
     themes: ["agents"],
+    highlight: "Demoed to U.S. Fish and Wildlife",
     bullets: [
       "Built an LLM chatbot on Azure for people applying for federal permits. It answers requirement questions, walks them through the process, and fills in form fields from the chat. Demoed to the U.S. Fish and Wildlife Service.",
       "Built full-stack prototypes with React, MongoDB, and PostgreSQL, and audited federal websites for accessibility.",
@@ -73,6 +76,7 @@ export const roles: Role[] = [
     start: "2025-05",
     end: "2025-08",
     themes: ["evals"],
+    highlight: "Adversarial tests for voice AI",
     bullets: [
       "Built a Dockerized FastAPI platform that runs adversarial tests against speech-to-speech AI systems using Twilio and agentic LLMs.",
       "Added automated prompt-injection and robustness testing to CI/CD with Vertex AI.",
@@ -86,6 +90,7 @@ export const roles: Role[] = [
     start: "2024-08",
     end: "2025-08",
     themes: ["robots"],
+    highlight: "Open-source library, SMGLib",
     bullets: [
       "Built SMGLib, an open-source library in Python, Gym, and PyTorch for benchmarking multi-robot path planners.",
       "Co-authored an ICRA 2025 paper on decentralized multi-agent coordination for robot navigation.",
@@ -98,6 +103,7 @@ export const roles: Role[] = [
     start: "2023-06",
     end: "2023-08",
     themes: ["robots"],
+    highlight: "Data used in an IROS 2023 paper",
     bullets: [
       "Engineered a ROS-based mobile device to collect multimodal sensor data (LiDAR, audio, video, odometry) for SLAM research.",
       "Automated sensor calibration and deployment via ROS launch configs. The dataset was used in an IROS 2023 publication.",
@@ -110,6 +116,7 @@ export const roles: Role[] = [
     start: "2023-05",
     end: "2024-06",
     themes: ["robots"],
+    highlight: "RL in multi-agent environments",
     bullets: [
       "Simulated collaborative robot behavior using NetworkX and interactive visualization tools (Dash, Plotly).",
       "Implemented and tested RL algorithms (Q-Learning, PPO, hierarchical decomposition) in dynamic multi-agent environments.",
@@ -123,6 +130,7 @@ export const roles: Role[] = [
     start: "2022-11",
     end: "2024-05",
     themes: ["evals"],
+    highlight: "CVPR 2024 paper",
     bullets: [
       "I joined in high school. Built an image classification pipeline over COCO and Conceptual Captions to study vision-language model representations.",
       "Contributed to a CVPR 2024 paper on black-box analysis and cross-modal reasoning in vision-language models.",

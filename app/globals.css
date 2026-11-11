@@ -867,6 +867,268 @@ a:hover {
   }
 }
 
+/* Project cards, milestone spans, and project pages */
+
+.project h3 a {
+  text-decoration: none;
+}
+
+.project h3 a:hover {
+  text-decoration: underline;
+}
+
+.project-stack {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.project-links {
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.featured .project {
+  max-width: none;
+  margin-top: 1.25rem;
+}
+
+.milestones {
+  margin-top: 0.9rem;
+}
+
+.milestone-spans {
+  display: flex;
+  gap: 4px;
+}
+
+.milestone-span {
+  flex: 1;
+  max-width: 3.5rem;
+  height: 0.45rem;
+  border-radius: 2px;
+  background: var(--rule);
+}
+
+.milestone-span[data-done] {
+  background: var(--industry);
+}
+
+.milestone-note {
+  margin-top: 0.4rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.milestone-list {
+  margin-top: 1rem;
+  max-width: 42rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.milestone-list li {
+  display: grid;
+  grid-template-columns: 1.25rem 1fr auto;
+  align-items: baseline;
+  column-gap: 0.25rem;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.milestone-mark {
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 1.5px solid var(--muted);
+  border-radius: 2px;
+}
+
+.milestone-list li[data-done] .milestone-mark {
+  border-color: var(--industry);
+  background: var(--industry);
+}
+
+.milestone-state {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.back-link {
+  margin-bottom: 1.5rem;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.project-page .project-head {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.project-page h1 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 680;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.project-lede {
+  margin-top: 0.75rem;
+  max-width: 40rem;
+  font-size: 1.2rem;
+  line-height: 1.45;
+}
+
+.page.project-page section {
+  margin-top: 3.25rem;
+}
+
+.project-page .prose + .prose {
+  margin-top: 0.75rem;
+}
+
+.project-page .project-highlights {
+  margin-top: 1rem;
+  max-width: 40rem;
+}
+
+.decisions {
+  margin-top: 1rem;
+  max-width: 42rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.decisions > div {
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.decisions dt {
+  font-weight: 620;
+}
+
+.decisions dd {
+  margin-top: 0.2rem;
+  color: var(--muted);
+}
+
+.results-wrap {
+  margin-top: 1rem;
+  max-width: 42rem;
+  overflow-x: auto;
+}
+
+.results {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.results th,
+.results td {
+  padding: 0.6rem 0.9rem 0.6rem 0;
+  border-top: 1px solid var(--rule);
+  text-align: left;
+}
+
+.results thead th {
+  border-top: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 560;
+}
+
+.results tbody th {
+  font-weight: 600;
+}
+
+/* Home: what's being built right now */
+
+.now-building {
+  margin-top: 1.25rem;
+  max-width: 38rem;
+  font-size: 0.95rem;
+}
+
+.now-dot {
+  display: inline-block;
+  margin-right: 0.5rem;
+  vertical-align: 0.08em;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--industry);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.published {
+  max-width: 42rem;
+}
+
+/* Timeline: one short note per role, and dimming for roles outside the chosen thread */
+
+.trace-note {
+  color: var(--muted);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.trace-note-track {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  padding: 0 0.3rem;
+  background: var(--paper);
+}
+
+.trace-row > summary:hover .trace-note-track {
+  background: var(--hover);
+}
+
+.trace-note-label {
+  display: none;
+  grid-column: 2;
+  white-space: normal;
+}
+
+.trace-row > summary {
+  transition: opacity 200ms ease;
+}
+
+.trace-row[data-dim] > summary {
+  opacity: 0.3;
+}
+
+.trace-row[data-dim] > summary:hover,
+.trace-row[data-dim][open] > summary {
+  opacity: 0.75;
+}
+
+@media (max-width: 900px) {
+  .trace-note-track {
+    display: none;
+  }
+
+  .trace-note-label {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .now-dot {
+    animation: none;
+  }
+
+  .trace-row > summary {
+    transition: none;
+  }
+}
+
 /* Page transitions.
    Chrome, Edge, and Safari animate between pages. Other browsers navigate normally. */
 

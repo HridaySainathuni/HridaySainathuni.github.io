@@ -3,17 +3,56 @@
     "slug": "resume-tailor",
     "title": "Resume Tailor",
     "status": "in-progress",
-    "summary": "A web app that rewrites your resume for a specific job posting with Claude. It only uses experience already on your resume, and it writes a matching cover letter too. Now being rebuilt as a grounded agent that checks every line against your resume.",
+    "summary": "A web app that rewrites your resume for a specific job posting with Claude, using only experience already on your resume. Now being rebuilt as an agent that checks every line against your resume.",
     "highlights": [
       "37 tests and CI on every pull request, with the app split into tested services",
       "Scores keyword overlap between your resume and the job description",
       "Imports job postings from a URL and exports to PDF or Word",
       "Accounts, saved history, and Stripe subscriptions, deployed with Docker on Render"
     ],
-    "stack": ["Python", "Flask", "PostgreSQL", "Anthropic API", "Stripe", "Docker"],
+    "stack": [
+      "Python",
+      "Flask",
+      "PostgreSQL",
+      "Anthropic API",
+      "Stripe",
+      "Docker"
+    ],
     "links": {
       "repo": "https://github.com/HridaySainathuni/resume-tailor-saas"
     },
-    "updated": "2026-11"
+    "updated": "2026-11",
+    "featured": true,
+    "problem": "Tailoring your resume to every job posting takes a long time. Language models can do it in seconds, but they tend to add skills and numbers you never had. A tailored resume is only useful if every line on it is true.",
+    "built": [
+      "You paste in your resume and a job posting, or a link to one. The app reorders and rewords your experience to match the role, writes a matching cover letter, and shows which keywords from the posting your resume is missing.",
+      "The first version makes one model call per feature. The rebuild turns it into an agent with tools, a check that traces every output line back to your original resume, and an eval suite that measures how often it invents something."
+    ],
+    "milestones": [
+      {
+        "name": "README, architecture diagram, and tests",
+        "done": true
+      },
+      {
+        "name": "MCP server with tools for job posts, company research, and resumes",
+        "done": false
+      },
+      {
+        "name": "Agent loop that plans and calls the tools",
+        "done": false
+      },
+      {
+        "name": "Grounding check that flags invented experience",
+        "done": false
+      },
+      {
+        "name": "Eval suite comparing baseline, agent, and agent with the check",
+        "done": false
+      },
+      {
+        "name": "Tracing and a live demo",
+        "done": false
+      }
+    ]
   }
 ]

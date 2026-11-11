@@ -2,11 +2,15 @@
 
 import { useLayoutEffect, useState } from "react";
 import { flushSync } from "react-dom";
-import RoleCards from "@/components/RoleCards";
 import Timeline from "@/components/Timeline";
 import { roles } from "@/content/profile";
 
 const themes = [
+  {
+    id: "all",
+    label: "Everything",
+    desc: "Every role, newest first, on one timeline.",
+  },
   {
     id: "agents",
     label: "Agents and memory",
@@ -22,17 +26,12 @@ const themes = [
     label: "Multi-agent robots",
     desc: "Robots that coordinate in tight spaces instead of getting stuck.",
   },
-  {
-    id: "all",
-    label: "All in order",
-    desc: "Every role, newest first, on one timeline.",
-  },
 ];
 
 const validIds = themes.map((t) => t.id);
 
 export default function Experience() {
-  const [active, setActive] = useState("agents");
+  const [active, setActive] = useState("all");
 
   // Read the thread from the URL before the first paint, so links like /experience#evals
   // open on the right tab without flashing the default one.
@@ -58,15 +57,13 @@ export default function Experience() {
   };
 
   const theme = themes.find((t) => t.id === active)!;
-  const list =
-    active === "all" ? roles : roles.filter((r) => r.themes?.includes(active));
 
   return (
     <main className="page">
       <h1>Experience</h1>
       <p className="section-note">
-        My work follows three threads. Pick one to see only that thread.
-        Workday covers both agents and evals, so it shows up in both.
+        My work follows three threads. Pick one to light up its roles on the timeline.
+        Click any row to see what I did there.
       </p>
       <div className="thread-tabs" role="tablist" aria-label="Experience threads">
         {themes.map((t) => {
@@ -92,11 +89,7 @@ export default function Experience() {
       <section aria-labelledby="thread-heading" className="thread-panel">
         <h2 id="thread-heading">{theme.label}</h2>
         <p className="section-note">{theme.desc}</p>
-        {active === "all" ? (
-          <Timeline roles={roles} />
-        ) : (
-          <RoleCards roles={list} />
-        )}
+        <Timeline roles={roles} theme={active} />
       </section>
     </main>
   );

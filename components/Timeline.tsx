@@ -18,7 +18,8 @@ function nowYm() {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
 }
 
-export default function Timeline({ roles: givenRoles }: { roles?: Role[] }) {
+// Pass `theme` to keep every role on screen but dim the ones outside that thread.
+export default function Timeline({ roles: givenRoles, theme }: { roles?: Role[]; theme?: string }) {
   const roles = givenRoles ?? allRoles;
   const now = nowYm();
   const startYear = Math.min(...roles.map((r) => Number(r.start.slice(0, 4))));
@@ -40,7 +41,12 @@ export default function Timeline({ roles: givenRoles }: { roles?: Role[] }) {
   const place = (r: Role) => {
     const s = monthIndex(r.start);
     const e = r.end ? monthIndex(r.end) + 1 : r.upcoming ? domainEnd : monthIndex(now) + 1;
-    return { left: pct(s), width: Math.max(pct(e) - pct(s), 0.8) };
+    const left = pct(s);
+    const width = Math.max(pct(e) - left, 0.8);
+    // Put the note on whichever side of the bar has more room.
+    const noteBefore = left + width / 2 > 50;
+    const note = noteBefore ? { right: `calc(${100 - left}% + 0.6rem)` } : { left: `calc(${left + width}% + 0.6rem)` };
+    return { left, width, note };
   };
 
   const dates = (r: Role) =>
@@ -62,14 +68,21 @@ export default function Timeline({ roles: givenRoles }: { roles?: Role[] }) {
 
       <ol className="trace-rows">
         {roles.map((r, i) => {
-          const { left, width } = place(r);
+          const { left, width, note } = place(r);
+          const dim = theme && theme !== "all" && !r.themes?.includes(theme);
           return (
             <li key={`${r.org}-${r.start}`}>
-              <details className="trace-row" data-kind={r.kind} data-upcoming={r.upcoming ? "true" : undefined}>
+              <details
+                className="trace-row"
+                data-kind={r.kind}
+                data-upcoming={r.upcoming ? "true" : undefined}
+                data-dim={dim ? "true" : undefined}
+              >
                 <summary>
                   <span className="trace-label">
                     <span className="trace-org">{r.org}</span>
                     <span className="trace-title">{r.title}</span>
+                    {r.highlight && <span className="trace-note trace-note-label">{r.highlight}</span>}
                   </span>
                   <span className="trace-track">
                     {years.map((y) => (
@@ -80,6 +93,11 @@ export default function Timeline({ roles: givenRoles }: { roles?: Role[] }) {
                       className="trace-bar"
                       style={{ left: `${left}%`, width: `${width}%`, animationDelay: `${i * 70}ms` }}
                     />
+                    {r.highlight && (
+                      <span className="trace-note trace-note-track" style={note} aria-hidden="true">
+                        {r.highlight}
+                      </span>
+                    )}
                   </span>
                 </summary>
                 <div className="trace-detail">
