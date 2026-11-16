@@ -5,10 +5,10 @@
     "status": "in-progress",
     "summary": "A web app that rewrites your resume for a specific job posting with Claude, using only experience already on your resume. Now being rebuilt as an agent that checks every line against your resume.",
     "highlights": [
-      "37 tests and CI on every pull request, with the app split into tested services",
-      "Scores keyword overlap between your resume and the job description",
-      "Imports job postings from a URL and exports to PDF or Word",
-      "Accounts, saved history, and Stripe subscriptions, deployed with Docker on Render"
+      "69 tests and CI on every pull request, with the app split into tested services",
+      "MCP server with four tools for job posts, company research, resumes, and past applications",
+      "Agent loop that gathers context with the tools and writes a tailored resume and cover letter",
+      "Scores keyword overlap between your resume and the job description"
     ],
     "stack": [
       "Python",
@@ -35,11 +35,11 @@
       },
       {
         "name": "MCP server with tools for job posts, company research, and resumes",
-        "done": false
+        "done": true
       },
       {
         "name": "Agent loop that plans and calls the tools",
-        "done": false
+        "done": true
       },
       {
         "name": "Grounding check that flags invented experience",
@@ -54,5 +54,63 @@
         "done": false
       }
     ]
+  },
+  {
+    "slug": "judgecheck",
+    "title": "JudgeCheck",
+    "status": "in-progress",
+    "featured": false,
+    "summary": "A toolkit for checking whether LLM judges are reliable. It loads JSONL and LangSmith trace exports into one shared record type for scoring.",
+    "problem": "An LLM judge can score a good answer as bad and sound confident doing it. Before you trust a judge, you need to know how reliable it is.",
+    "built": [
+      "It loads JSONL trace files and LangSmith dataset exports into one shared record type, so the same traces can be scored by any judge."
+    ],
+    "highlights": [
+      "Loads JSONL and LangSmith trace exports into one shared record type",
+      "12 tests and CI on every pull request"
+    ],
+    "decisions": [
+      {
+        "title": "One shared TraceRecord for every loader",
+        "body": "Judges and reliability checks should only ever see one shape. The loaders own the messy mapping from each source format, and everything after ingestion works with the same fields."
+      },
+      {
+        "title": "MalformedTraceError for bad traces",
+        "body": "One named error type lets callers catch exactly this failure, and failing the whole load with the file and line number makes a bad trace easy to find and fix. Raising instead of skipping keeps the trace count honest."
+      }
+    ],
+    "milestones": [
+      {
+        "name": "Trace ingestion from JSONL and LangSmith",
+        "done": true
+      },
+      {
+        "name": "Configurable LLM judges",
+        "done": false
+      },
+      {
+        "name": "Statistics with Wilson intervals and Cohen's kappa",
+        "done": false
+      },
+      {
+        "name": "Reliability checks and cross-judge agreement",
+        "done": false
+      },
+      {
+        "name": "CLI and static HTML report",
+        "done": false
+      },
+      {
+        "name": "Packaging",
+        "done": false
+      }
+    ],
+    "stack": [
+      "Python"
+    ],
+    "links": {
+      "repo": "https://github.com/HridaySainathuni/judgecheck"
+    },
+    "updated": "2026-11"
   }
 ]
