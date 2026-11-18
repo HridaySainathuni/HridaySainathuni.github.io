@@ -5,10 +5,10 @@
     "status": "in-progress",
     "summary": "A web app that rewrites your resume for a specific job posting with Claude, using only experience already on your resume. Now being rebuilt as an agent that checks every line against your resume.",
     "highlights": [
-      "69 tests and CI on every pull request, with the app split into tested services",
+      "76 tests and CI on every pull request, with the app split into tested services",
       "MCP server with four tools for job posts, company research, resumes, and past applications",
       "Agent loop that gathers context with the tools and writes a tailored resume and cover letter",
-      "Scores keyword overlap between your resume and the job description"
+      "Grounding verifier checks every line of the tailored resume against your resume and flags invented experience"
     ],
     "stack": [
       "Python",
@@ -43,7 +43,7 @@
       },
       {
         "name": "Grounding check that flags invented experience",
-        "done": false
+        "done": true
       },
       {
         "name": "Eval suite comparing baseline, agent, and agent with the check",
@@ -63,11 +63,13 @@
     "summary": "A toolkit for checking whether LLM judges are reliable. It loads JSONL and LangSmith trace exports into one shared record type for scoring.",
     "problem": "An LLM judge can score a good answer as bad and sound confident doing it. Before you trust a judge, you need to know how reliable it is.",
     "built": [
-      "It loads JSONL trace files and LangSmith dataset exports into one shared record type, so the same traces can be scored by any judge."
+      "It loads JSONL trace files and LangSmith dataset exports into one shared record type, so the same traces can be scored by any judge.",
+      "Two judges score each trace through the same Judge protocol: one for relevance and one for grounding. Each takes a trace and returns a verdict plus a rationale, with the prompt and model configurable."
     ],
     "highlights": [
       "Loads JSONL and LangSmith trace exports into one shared record type",
-      "12 tests and CI on every pull request"
+      "19 tests and CI on every pull request",
+      "Two configurable LLM judges that score traces for relevance and grounding"
     ],
     "decisions": [
       {
@@ -77,6 +79,10 @@
       {
         "title": "MalformedTraceError for bad traces",
         "body": "One named error type lets callers catch exactly this failure, and failing the whole load with the file and line number makes a bad trace easy to find and fix. Raising instead of skipping keeps the trace count honest."
+      },
+      {
+        "title": "One Judge protocol with prompt and model set at construction",
+        "body": "Every judge implements one protocol: one method that takes a trace and returns a verdict plus a rationale. Prompt and model are set at construction, the API key comes from the environment, and a client can be injected so tests run offline."
       }
     ],
     "milestones": [
@@ -86,7 +92,7 @@
       },
       {
         "name": "Configurable LLM judges",
-        "done": false
+        "done": true
       },
       {
         "name": "Statistics with Wilson intervals and Cohen's kappa",
