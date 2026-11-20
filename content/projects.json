@@ -68,8 +68,9 @@
     ],
     "highlights": [
       "Loads JSONL and LangSmith trace exports into one shared record type",
-      "19 tests and CI on every pull request",
-      "Two configurable LLM judges that score traces for relevance and grounding"
+      "25 tests and CI on every pull request",
+      "Two configurable LLM judges that score traces for relevance and grounding",
+      "Statistics with Wilson intervals and Cohen's kappa"
     ],
     "decisions": [
       {
@@ -96,7 +97,7 @@
       },
       {
         "name": "Statistics with Wilson intervals and Cohen's kappa",
-        "done": false
+        "done": true
       },
       {
         "name": "Reliability checks and cross-judge agreement",
