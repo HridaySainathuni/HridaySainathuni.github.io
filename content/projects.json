@@ -5,9 +5,9 @@
     "status": "in-progress",
     "summary": "A web app that rewrites your resume for a specific job posting with Claude, using only experience already on your resume. Now being rebuilt as an agent that checks every line against your resume.",
     "highlights": [
-      "76 tests and CI on every pull request, with the app split into tested services",
+      "93 tests and CI on every pull request, with the app split into tested services",
       "MCP server with four tools for job posts, company research, resumes, and past applications",
-      "Agent loop that gathers context with the tools and writes a tailored resume and cover letter",
+      "Eval suite comparing the single-call baseline, the agent, and the agent with the grounding check, with Wilson intervals",
       "Grounding verifier checks every line of the tailored resume against your resume and flags invented experience"
     ],
     "stack": [
@@ -47,7 +47,7 @@
       },
       {
         "name": "Eval suite comparing baseline, agent, and agent with the check",
-        "done": false
+        "done": true
       },
       {
         "name": "Tracing and a live demo",
@@ -67,8 +67,8 @@
       "Two judges score each trace through the same Judge protocol: one for relevance and one for grounding. Each takes a trace and returns a verdict plus a rationale, with the prompt and model configurable."
     ],
     "highlights": [
-      "Loads JSONL and LangSmith trace exports into one shared record type",
-      "25 tests and CI on every pull request",
+      "Reliability checks: perturbation stability and cross-judge agreement with Cohen's kappa",
+      "33 tests and CI on every pull request",
       "Two configurable LLM judges that score traces for relevance and grounding",
       "Statistics with Wilson intervals and Cohen's kappa"
     ],
@@ -101,7 +101,7 @@
       },
       {
         "name": "Reliability checks and cross-judge agreement",
-        "done": false
+        "done": true
       },
       {
         "name": "CLI and static HTML report",
