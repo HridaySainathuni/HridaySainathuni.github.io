@@ -2,13 +2,13 @@
   {
     "slug": "resume-tailor",
     "title": "Resume Tailor",
-    "status": "in-progress",
+    "status": "shipped",
     "summary": "A web app that rewrites your resume for a specific job posting with Claude, using only experience already on your resume. Now being rebuilt as an agent that checks every line against your resume.",
     "highlights": [
-      "93 tests and CI on every pull request, with the app split into tested services",
+      "97 tests and CI on every pull request, with the app split into tested services",
       "MCP server with four tools for job posts, company research, resumes, and past applications",
       "Eval suite comparing the single-call baseline, the agent, and the agent with the grounding check, with Wilson intervals",
-      "Grounding verifier checks every line of the tailored resume against your resume and flags invented experience"
+      "OpenTelemetry tracing across the agent loop and a live demo script that runs with no API key"
     ],
     "stack": [
       "Python",
@@ -51,7 +51,7 @@
       },
       {
         "name": "Tracing and a live demo",
-        "done": false
+        "done": true
       }
     ]
   },
