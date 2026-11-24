@@ -68,8 +68,8 @@
     ],
     "highlights": [
       "Reliability checks: perturbation stability and cross-judge agreement with Cohen's kappa",
-      "33 tests and CI on every pull request",
-      "Two configurable LLM judges that score traces for relevance and grounding",
+      "37 tests and CI on every pull request",
+      "CLI that runs judges over a trace file and writes a static HTML report",
       "Statistics with Wilson intervals and Cohen's kappa"
     ],
     "decisions": [
@@ -105,7 +105,7 @@
       },
       {
         "name": "CLI and static HTML report",
-        "done": false
+        "done": true
       },
       {
         "name": "Packaging",
