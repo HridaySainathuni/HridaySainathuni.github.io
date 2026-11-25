@@ -119,5 +119,119 @@
       "repo": "https://github.com/HridaySainathuni/judgecheck"
     },
     "updated": "2026-11"
+  },
+  {
+    "slug": "go-job-queue",
+    "title": "Go Job Queue",
+    "status": "in-progress",
+    "featured": false,
+    "summary": "A distributed job queue in Go with at-least-once delivery. It starts as a single-node queue and grows into a three-node replicated cluster.",
+    "problem": "A job queue has to keep going when a worker crashes or a node dies. Jobs must run once, or at least once, and never vanish silently.",
+    "built": [
+      "You enqueue a job and a worker leases it, acks it when done, or nacks it to try again. The same idempotency key twice never creates a duplicate job.",
+      "A leased job that is never acked becomes available again after its lease timeout, so a crashed worker never loses the job."
+    ],
+    "highlights": [
+      "Single-node queue with enqueue, lease, ack, and nack",
+      "Idempotency keys stop duplicate jobs",
+      "Lease timeouts re-queue a job that is never acked",
+      "5 tests with the race detector, vet and gofmt clean"
+    ],
+    "decisions": [
+      {
+        "title": "Module and project layout",
+        "body": "The module is github.com/HridaySainathuni/go-job-queue. cmd/server holds the node entry point and internal/queue holds the queue itself, because the queue is an implementation detail of this service, not a library for other modules."
+      }
+    ],
+    "milestones": [
+      {
+        "name": "Single-node queue",
+        "done": true
+      },
+      {
+        "name": "Persistence",
+        "done": false
+      },
+      {
+        "name": "Raft replication",
+        "done": false
+      },
+      {
+        "name": "Leases and retries",
+        "done": false
+      },
+      {
+        "name": "Metrics",
+        "done": false
+      },
+      {
+        "name": "Load and chaos tests",
+        "done": false
+      },
+      {
+        "name": "Design writeup",
+        "done": false
+      }
+    ],
+    "stack": [
+      "Go"
+    ],
+    "links": {
+      "repo": "https://github.com/HridaySainathuni/go-job-queue"
+    },
+    "updated": "2026-11"
+  },
+  {
+    "slug": "lora-skill-extractor",
+    "title": "LoRA Skill Extractor",
+    "status": "in-progress",
+    "featured": false,
+    "summary": "A small fine-tuned model that pulls structured skills and requirements out of job postings, so the resume tailor can match them without a big API model.",
+    "problem": "Matching a resume to a job posting means knowing which skills the posting asks for. A big API model can do it, but it costs money and time on every call.",
+    "built": [
+      "It collects public job postings and splits them into train and test sets with a fixed seed.",
+      "A heuristic pass labels each posting with skills from a curated keyword list, marked as a first pass and not ground truth."
+    ],
+    "highlights": [
+      "16 real job postings collected from a public API",
+      "Train and test split with a fixed seed",
+      "Heuristic skill labels, marked as a first pass",
+      "9 tests and ruff clean"
+    ],
+    "decisions": [
+      {
+        "title": "Small model, 1B to 3B parameters",
+        "body": "A model this size fits on a single Colab GPU for LoRA training and serves cheaply with vLLM, while still being large enough to learn structured extraction from job posting text."
+      },
+      {
+        "title": "Heuristic first-pass labels",
+        "body": "A curated keyword list matched against the description gives a usable first pass immediately, with a fixed label vocabulary that keeps the label set consistent. Hand-labeling is slow to repeat as the dataset grows, and a model-based pass adds cost and nondeterminism. The labels are not ground truth and will be reviewed or replaced before training."
+      }
+    ],
+    "milestones": [
+      {
+        "name": "Dataset build",
+        "done": true
+      },
+      {
+        "name": "LoRA training",
+        "done": false
+      },
+      {
+        "name": "vLLM serving",
+        "done": false
+      },
+      {
+        "name": "Benchmark table",
+        "done": false
+      }
+    ],
+    "stack": [
+      "Python"
+    ],
+    "links": {
+      "repo": "https://github.com/HridaySainathuni/lora-skill-extractor"
+    },
+    "updated": "2026-11"
   }
 ]
